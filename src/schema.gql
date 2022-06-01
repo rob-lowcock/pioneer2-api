@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Suggestion {
+  id: ID!
+  content: String!
+  timestamp: Int!
+}
+
+type Query {
+  suggestion(id: String!): Suggestion!
+}
+
+type Mutation {
+  createSuggestion(createSuggestionData: NewSuggestionInput!): Suggestion!
+}
+
+input NewSuggestionInput {
+  content: String!
+}
