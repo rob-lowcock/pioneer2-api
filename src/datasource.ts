@@ -3,8 +3,8 @@ import 'dotenv/config';
 import * as path from 'path';
 
 const baseDir = path.join(__dirname);
-const entitiesPath = `${baseDir}/src/db/entities/*.entity.ts`;
-const migrationPath = `${baseDir}/migrations/*.ts`;
+const entitiesPath = `${baseDir}/db/entities/*.entity.ts`;
+const migrationPath = `${baseDir}/../migrations/*.ts`;
 console.log(migrationPath);
 
 export default new DataSource({
