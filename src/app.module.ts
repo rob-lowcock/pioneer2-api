@@ -8,6 +8,7 @@ import { SuggestionsResolver } from './suggestions/suggestions.resolver';
 import { SuggestionsService } from './suggestions/suggestions.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SuggestionsModule } from './suggestions/suggestions.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         database: configService.get('DB_DATABASE'),
       }),
       inject: [ConfigService]
-    })
+    }),
+    SuggestionsModule
   ],
   controllers: [AppController],
   providers: [AppService, SuggestionsService, SuggestionsResolver],
