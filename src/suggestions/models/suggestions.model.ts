@@ -8,6 +8,6 @@ export class Suggestion {
     @Field(type => String)
     content: string;
 
-    @Field(type => Int)
-    timestamp: number;
+    @Field(type => Date)
+    created_at: Date;
 }

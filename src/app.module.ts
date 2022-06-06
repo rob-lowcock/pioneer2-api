@@ -8,6 +8,8 @@ import { SuggestionsResolver } from './suggestions/suggestions.resolver';
 import { SuggestionsService } from './suggestions/suggestions.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SuggestionsModule } from './suggestions/suggestions.module';
+import { SuggestionEntity } from './suggestions/suggestion.entity';
 
 @Module({
   imports: [
@@ -25,11 +27,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
+        entities: [SuggestionEntity],
+        // synchronize: true,
       }),
       inject: [ConfigService]
-    })
+    }),
+    SuggestionsModule
   ],
   controllers: [AppController],
-  providers: [AppService, SuggestionsService, SuggestionsResolver],
+  providers: [AppService, SuggestionsResolver],
 })
 export class AppModule {}
