@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
 import { SuggestionsResolver } from './suggestions/suggestions.resolver';
-import { SuggestionsService } from './suggestions/suggestions.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SuggestionsModule } from './suggestions/suggestions.module';
 import { SuggestionEntity } from './suggestions/suggestion.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -28,13 +27,14 @@ import { SuggestionEntity } from './suggestions/suggestion.entity';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [SuggestionEntity],
-        // synchronize: true,
       }),
       inject: [ConfigService]
     }),
-    SuggestionsModule
+    SuggestionsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'client'),
+    })
   ],
-  controllers: [AppController],
   providers: [AppService, SuggestionsResolver],
 })
 export class AppModule {}
